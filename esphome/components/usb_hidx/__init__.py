@@ -108,7 +108,9 @@ async def to_code(config):
         for device_folder in devices_dir.iterdir():
             if device_folder.is_dir() and not device_folder.name.startswith("_"):
                 # Add device folder to include path
-                cg.add_build_flag(f"-I{device_folder}")
+                # Use .as_posix() to ensure forward slashes
+                path_str = device_folder.resolve().as_posix()
+                cg.add_build_flag(f"-I{path_str}")
 
                 # Register device platforms (text_sensor, binary_sensor, sensor)
                 for platform_type in ["text_sensor", "binary_sensor", "sensor"]:

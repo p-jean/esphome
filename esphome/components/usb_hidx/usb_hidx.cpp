@@ -233,11 +233,15 @@ void USBHIDXComponent::handle_new_device(uint8_t address) {
       }
       // Call on_device_ready for drivers that need initialization
       if (strcmp(driver->get_name(), "PlayStation") == 0) {
+		#ifdef USB_HIDX_ENABLE_GAMEPAD
         auto *ps_driver = static_cast<PlayStationDriver *>(driver);
         ps_driver->on_device_ready(dev);
+		#endif
       } else if (strcmp(driver->get_name(), "Switch") == 0) {
+		#ifdef USB_HIDX_ENABLE_GAMEPAD
         auto *switch_driver = static_cast<SwitchDriver *>(driver);
         switch_driver->on_device_ready(dev);
+		#endif
       }
       break;
     }
@@ -514,11 +518,13 @@ void USBHIDXComponent::send_xbox360_output(HIDDevice *device, const uint8_t *dat
 }
 
 void USBHIDXComponent::send_xbox360_rumble(uint8_t left_motor, uint8_t right_motor) {
+  #ifdef USB_HIDX_ENABLE_GAMEPAD
   if (!xbox360_driver_) {
     ESP_LOGW(TAG, "Xbox 360 driver not initialized");
     return;
   }
   xbox360_driver_->send_rumble(xbox360_device_, left_motor, right_motor);
+  #endif
 }
 
 void USBHIDXComponent::send_playstation_get_report(HIDDevice *device, uint8_t report_id) {
