@@ -3,6 +3,6 @@
   "description": "USB HID device support with hot-plug capability for ESP32-S3",
   "version": "1.0.0",
   "codeowners": ["@nonasuomy"],
-  "dependencies": ["esp32", "usb_host"],
+  "dependencies": ["esp32", "usb_host", "sensor", "binary_sensor", "text_sensor"],
   "documentation": "https://github.com/nonasuomy/esphome-usb-hidx"
 }

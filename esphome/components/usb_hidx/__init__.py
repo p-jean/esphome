@@ -8,7 +8,7 @@ from esphome.const import CONF_ID
 
 CODEOWNERS = ["@nonasuomy"]
 DEPENDENCIES = ["esp32"]
-AUTO_LOAD = ["usb_host"]
+AUTO_LOAD = ["usb_host", "sensor", "binary_sensor", "text_sensor"]
 
 CONF_HUB = "hub"
 CONF_KEYBOARD = "keyboard"
