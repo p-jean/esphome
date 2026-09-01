@@ -98,7 +98,7 @@ async def to_code(config):
     devices_dir = component_dir / "devices"
 
     # Add component directory itself to include path
-    cg.add_build_flag(f"-I{component_dir}")
+    cg.add_cxx_build_flag(f"-I{component_dir}")
 
     # Add devices directory to Python path for platform discovery
     if str(devices_dir) not in sys.path:
@@ -110,7 +110,7 @@ async def to_code(config):
                 # Add device folder to include path
                 # Use .as_posix() to ensure forward slashes
                 path_str = device_folder.resolve().as_posix()
-                cg.add_build_flag(f"-I{path_str}")
+                cg.add_cxx_build_flag(f"-I{path_str}")
 
                 # Register device platforms (text_sensor, binary_sensor, sensor)
                 for platform_type in ["text_sensor", "binary_sensor", "sensor"]:
